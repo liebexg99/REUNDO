@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Title — Official Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Simpan intro.mp4 dan background.mp3 di folder assets. -->
+<div class="bg">
+  <video autoplay muted loop playsinline preload="auto" onerror="this.remove()">
+    <source src="assets/intro.mp4" type="video/mp4">
+  </video>
+</div>
+<audio id="backgroundMusic" loop preload="auto">
+  <source src="assets/background.mp3" type="audio/mpeg">
+</audio>
+
+<main>
+  <section class="hero">
+    <header class="top">
+      <div class="logo">Reundo<br><span class="logo-subtitle">Hacking Past</span></div>
+      <nav class="nav" aria-label="Menu utama">
+        <button class="ico" aria-label="Share"><svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 11l7.6-4M8.2 13l7.6 4"/></svg></button>
+        <button class="ico" aria-label="Stats"><svg viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg></button>
+        <button class="ico" aria-label="Language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></button>
+        <button class="music-button" id="musicToggle" type="button" aria-pressed="false">MUSIC: OFF</button>
+        <button class="home" id="homeButton" type="button">HOME</button>
+      </nav>
+    </header>
+
+    <div class="center">
+      <h1 class="title"><br></h1>
+      <p class="version">Version 1.0 Coming Soon</p>
+      <div class="store-options">
+        <figure class="qr-card">
+          <img src="assets/qr.png" alt="QR code">
+          <figcaption>SCAN ME</figcaption>
+        </figure>
+        <div class="stores">
+          <a class="store" href=""><img class="icon" src="assets/windows.png" alt=""><span>Windows</span></a>
+          <a class="store" href=""><img class="icon" src="assets/playstore.png" alt=""><span>Google Play</span></a>
+          <a class="store" href=""><img class="icon playgames-icon" src="assets/playgames.png" alt=""><span>Play Games</span></a>
+          <a class="store" href=""><img class="icon" src="assets/apple.png" alt=""><span>App Store</span></a>
+          <a class="store" href=""><img class="icon" src="assets/epicgames.png" alt=""><span>Epic Games Store</span></a>
+          <a class="store" href=""><img class="icon" src="assets/ps5.png" alt=""><span>PS5</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hint">Scroll</div>
+  </section>
+
+  <section id="next">
+    <iframe
+      class="trailer-frame"
+      src="views/trailer.html"
+      title="Reundo version trailer"
+      loading="lazy"
+      allow="fullscreen"
+      allowfullscreen>
+    </iframe>
+  </section>
+
+  <section class="description-section">
+    <iframe
+      class="description-frame"
+      src="views/description.html"
+      title="Reundo game description"
+      loading="lazy"
+      allow="fullscreen"
+      allowfullscreen>
+    </iframe>
+  </section>
+
+  <footer class="site-footer">
+    <iframe
+      class="footer-frame"
+      src="views/footer.html"
+      title="Reundo website footer"
+      loading="lazy">
+    </iframe>
+  </footer>
+</main>
+
+<!-- <aside class="music-prompt" id="musicPrompt" aria-label="Izin memutar musik latar">
+  <p id="musicPromptMessage">We use cookies to help personalize content and provide a better experience. By continuing to browse this site or use our services, you agree to this use as outlined in our Privacy Policy.</p>
+  <button class="music-prompt-button" id="musicAccept" type="button">OK</button>
+</aside> -->
+
+<script src="js/script.js" defer></script>
+</body>
+</html>
