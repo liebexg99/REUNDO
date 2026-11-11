@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <title>Reundo — Gallery</title>
+  <link rel="stylesheet" href="../css/galery.css">
+</head>
+<body>
+  <main class="gallery">
+    <header class="gallery-heading">
+      <p class="eyebrow">A CLOSER LOOK</p>
+      <h1>GAME GALLERY</h1>
+      <p class="gallery-subtitle">A few glimpses from the journey ahead.</p>
+    </header>
+
+    <div class="carousel" aria-label="Game image carousel">
+      <button class="carousel-arrow previous" type="button" aria-label="Previous image">
+        <span aria-hidden="true">&lsaquo;</span>
+      </button>
+
+      <div class="carousel-stage">
+        <article class="gallery-card" data-index="0" aria-label="Gallery image 1 of 3">
+          <video class="gallery-image" muted playsinline preload="metadata" data-frame="0.2" aria-label="A moment from the Reundo game preview">
+            <source src="../assets/intro.mp4" type="video/mp4">
+          </video>
+          <div class="card-caption">
+            <span>01 / THE FIRST TRACE</span>
+            <h2>Where it begins</h2>
+          </div>
+        </article>
+
+        <article class="gallery-card" data-index="1" aria-label="Gallery image 2 of 3">
+          <video class="gallery-image" muted playsinline preload="metadata" data-frame="0.5" aria-label="A moment from the Reundo game preview">
+            <source src="../assets/intro.mp4" type="video/mp4">
+          </video>
+          <div class="card-caption">
+            <span>02 / BETWEEN THE MOMENTS</span>
+            <h2>Paths entwined</h2>
+          </div>
+        </article>
+
+        <article class="gallery-card" data-index="2" aria-label="Gallery image 3 of 3">
+          <video class="gallery-image" muted playsinline preload="metadata" data-frame="0.8" aria-label="A moment from the Reundo game preview">
+            <source src="../assets/intro.mp4" type="video/mp4">
+          </video>
+          <div class="card-caption">
+            <span>03 / WHAT REMAINS</span>
+            <h2>Just beyond the veil</h2>
+          </div>
+        </article>
+      </div>
+
+      <button class="carousel-arrow next" type="button" aria-label="Next image">
+        <span aria-hidden="true">&rsaquo;</span>
+      </button>
+    </div>
+
+    <nav class="carousel-dots" aria-label="Choose gallery image">
+      <button type="button" aria-label="Show image 1" aria-current="true"></button>
+      <button type="button" aria-label="Show image 2"></button>
+      <button type="button" aria-label="Show image 3"></button>
+    </nav>
+  </main>
+  <script src="../js/galery.js"></script>
+  <script src="../js/frame-scroll.js"></script>
+</body>
+</html>

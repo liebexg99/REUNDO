@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, .13), transparent 58%),
+    linear-gradient(145deg, #303030 0%, #141414 48%, #070707 100%);
+  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gallery {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.gallery-heading {
+  position: relative;
+  z-index: 3;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .34em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.gallery-subtitle {
+  margin: 10px 0 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.carousel {
+  position: relative;
+  width: min(100%, 1080px);
+  height: clamp(300px, 54vh, 500px);
+  margin-top: 20px;
+}
+
+.carousel-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1200px;
+}
+
+.gallery-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(58%, 560px);
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .23);
+  border-radius: 20px;
+  background: #101010;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .55);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.72);
+  transition: transform .55s cubic-bezier(.2, .75, .25, 1), opacity .45s, filter .45s;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.gallery-card.is-active {
+  z-index: 2;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  filter: grayscale(0);
+  pointer-events: auto;
+}
+
+.gallery-card.is-previous {
+  z-index: 1;
+  opacity: .58;
+  transform: translate(-112%, -50%) scale(.78) rotateY(12deg);
+}
+
+.gallery-card.is-next {
+  z-index: 1;
+  opacity: .58;
+  transform: translate(12%, -50%) scale(.78) rotateY(-12deg);
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 72%;
+  object-fit: cover;
+  background: #080808;
+}
+
+.card-caption {
+  display: flex;
+  height: 28%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px clamp(18px, 3vw, 32px);
+  background: linear-gradient(135deg, #f8f8f8, #d6d6d6);
+  color: #111;
+  text-align: left;
+}
+
+.card-caption span {
+  color: #666;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+
+.card-caption h2 {
+  margin: 8px 0 0;
+  font-size: clamp(17px, 2.2vw, 25px);
+  font-weight: 700;
+}
+
+.carousel-arrow {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 50%;
+  background: rgba(15, 15, 15, .78);
+  color: #fff;
+  cursor: pointer;
+  font-size: 32px;
+  line-height: 1;
+  transition: background .2s, transform .2s;
+}
+
+.carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: #fff;
+  color: #111;
+}
+
+.carousel-arrow.previous {
+  left: 2%;
+}
+
+.carousel-arrow.next {
+  right: 2%;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.carousel-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #666;
+  cursor: pointer;
+  transition: width .2s, border-radius .2s, background .2s;
+}
+
+.carousel-dots button[aria-current="true"] {
+  width: 26px;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.carousel-arrow:focus-visible,
+.carousel-dots button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .gallery {
+    padding: 24px 12px;
+  }
+
+  .carousel {
+    height: clamp(280px, 48vh, 420px);
+    margin-top: 28px;
+  }
+
+  .gallery-card {
+    width: 74%;
+    border-radius: 14px;
+  }
+
+  .gallery-card.is-previous {
+    transform: translate(-88%, -50%) scale(.72);
+  }
+
+  .gallery-card.is-next {
+    transform: translate(-12%, -50%) scale(.72);
+  }
+
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 27px;
+  }
+
+  .carousel-arrow.previous {
+    left: 0;
+  }
+
+  .carousel-arrow.next {
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

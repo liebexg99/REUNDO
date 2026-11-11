@@ -7,18 +7,18 @@ const homeButton = document.getElementById('homeButton');
 const sectionFrames = [
   document.querySelector('.trailer-frame'),
   document.querySelector('.description-frame'),
+  document.querySelector('.gallery-frame'),
   document.querySelector('.footer-frame')
 ];
 const pageSections = [
   document.querySelector('.hero'),
   document.querySelector('#next'),
   document.querySelector('.description-section'),
+  document.querySelector('.gallery-section'),
   document.querySelector('.site-footer')
 ];
-let sectionScrollLocked = false;
-let sectionScrollTimer;
-let pageWheelGestureLocked = false;
-let pageWheelUnlockTimer;
+let requestedSectionIndex = null;
+let sectionIndexResetTimer;
 
 history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
@@ -75,39 +75,24 @@ window.addEventListener('message', event => {
 });
 
 const navigateOneSection = deltaY => {
-  if (sectionScrollLocked || !deltaY) return;
+  if (!deltaY) return;
 
-  const currentIndex = pageSections.reduce((closestIndex, section, index) => {
-    const closestDistance = Math.abs(pageSections[closestIndex].getBoundingClientRect().top);
-    const distance = Math.abs(section.getBoundingClientRect().top);
-    return distance < closestDistance ? index : closestIndex;
-  }, 0);
-  const direction = Math.sign(deltaY);
-  const targetIndex = Math.max(0, Math.min(pageSections.length - 1, currentIndex + direction));
-
-  if (targetIndex === currentIndex) return;
-
-  sectionScrollLocked = true;
-  pageSections[targetIndex].scrollIntoView({behavior: 'smooth', block: 'start'});
-  clearTimeout(sectionScrollTimer);
-  sectionScrollTimer = setTimeout(() => {
-    sectionScrollLocked = false;
-  }, 600);
-};
-
-window.addEventListener('wheel', event => {
-  if (event.deltaY === 0) return;
-  event.preventDefault();
-
-  if (!pageWheelGestureLocked) {
-    pageWheelGestureLocked = true;
-    navigateOneSection(event.deltaY);
+  if (requestedSectionIndex === null) {
+    requestedSectionIndex = pageSections.reduce((closestIndex, section, index) => {
+      const closestDistance = Math.abs(pageSections[closestIndex].getBoundingClientRect().top);
+      const distance = Math.abs(section.getBoundingClientRect().top);
+      return distance < closestDistance ? index : closestIndex;
+    }, 0);
   }
 
-  clearTimeout(pageWheelUnlockTimer);
-  pageWheelUnlockTimer = setTimeout(() => {
-    pageWheelGestureLocked = false;
-  }, 10);
-}, {passive:false});
+  const direction = Math.sign(deltaY);
+  requestedSectionIndex = Math.max(0, Math.min(pageSections.length - 1, requestedSectionIndex + direction));
+  pageSections[requestedSectionIndex].scrollIntoView({behavior: 'smooth', block: 'start'});
+
+  clearTimeout(sectionIndexResetTimer);
+  sectionIndexResetTimer = setTimeout(() => {
+    requestedSectionIndex = null;
+  }, 700);
+};
 
 window.addEventListener('pageshow', () => window.scrollTo(0, 0), {once:true});

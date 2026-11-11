@@ -1,5 +1,5 @@
-let wheelGestureLocked = false;
 let wheelUnlockTimer;
+let wheelGestureLocked = false;
 
 const sendSectionScroll = deltaY => {
   if (window.parent !== window && deltaY !== 0 && !wheelGestureLocked) {
@@ -12,15 +12,14 @@ window.addEventListener('wheel', event => {
   if (event.deltaY === 0) return;
   event.preventDefault();
 
-  clearTimeout(wheelUnlockTimer);
   if (!wheelGestureLocked) sendSectionScroll(event.deltaY);
+  clearTimeout(wheelUnlockTimer);
   wheelUnlockTimer = setTimeout(() => {
     wheelGestureLocked = false;
-  }, 220);
+  }, 180);
 }, {passive:false});
 
 let touchStartY = null;
-let touchUnlockTimer;
 
 window.addEventListener('touchstart', event => {
   touchStartY = event.touches[0].clientY;
@@ -31,14 +30,10 @@ window.addEventListener('touchmove', event => {
   const deltaY = touchStartY - event.touches[0].clientY;
   if (Math.abs(deltaY) < 40) return;
   event.preventDefault();
-  sendSectionScroll(deltaY);
+  window.parent.postMessage({type: 'reundo-section-scroll', deltaY}, '*');
   touchStartY = null;
 }, {passive:false});
 
 window.addEventListener('touchend', () => {
   touchStartY = null;
-  clearTimeout(touchUnlockTimer);
-  touchUnlockTimer = setTimeout(() => {
-    wheelGestureLocked = false;
-  }, 220);
 }, {passive:true});
